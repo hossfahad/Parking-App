@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Main-App-Front</title>
+</head>
+
+<body>
+<h3>My Google Maps Demo</h3>
+<div id="map"></div>
+<input type="button" onclick="chooseButton()" name="selling" class="park-option">Leave My Parking
+<input type="button" onclick="chooseButton()" name="buying" class="park-option">Look For Parking
+
+// Scripts
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+    app.initialize();
+</script>
+// Google Maps API (How does this work...)
+<script>
+    function initMap() {
+        var uluru = { lat: -25.363, lng: 131.044 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIbMz6ykO3XvwRiwnK1ppSKogxVCSspCM&callback=initMap">
+</script>
+// function(decide if you are selling or buying parking) ...
+<script>
+    function chooseButton() {
+        if (button.selling) {
+            window.open('selling.html');
+        }
+        else {
+            window.open('buying.html');
+        };
+    };
+</script>
+</body>
+</html>
