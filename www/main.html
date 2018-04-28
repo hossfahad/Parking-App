@@ -10,16 +10,12 @@
 </head>
 
 <body>
-<h3>My Google Maps Demo</h3>
+<h3>Parking App</h3>
 <div id="map"></div>
 <input type="button" onclick="chooseButton()" name="selling" class="park-option">Leave My Parking
 <input type="button" onclick="chooseButton()" name="buying" class="park-option">Look For Parking
 
 // Scripts
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript">
-    app.initialize();
-</script>
 // Google Maps API (How does this work...)
 <script>
     function initMap() {
@@ -46,6 +42,10 @@
             window.open('buying.html');
         };
     };
+</script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+    app.initialize();
 </script>
 </body>
 </html>
