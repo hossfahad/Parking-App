@@ -64,6 +64,15 @@
                 infowindow.open(map, this);
             });
         }
+        if ("geolocation" in navigator) {
+             navigator.geolocation.getCurrentPosition(function (position) {
+                map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
+                
+            });
+            } else {
+                alert("Please enable location services!"))/*displays error message*/
+
+            }
     </script>
 </head>
 
@@ -73,15 +82,7 @@
         async defer></script>
 
     <footer align="middle">
-        <br>
-        <a href="">Give a spot</a>
-        &nbsp;|&nbsp;
-        <a href="">Find Parking Spot</a>
-        &nbsp;|&nbsp;
-        <a href="">Rent the driveway</a>
-
     </footer>
-    <br>
     <div style="width:100%" class="row-fluid">
         <div align="middle" class="span 12">
             <button type="button" class="btn btn-default">Give spot</button>
