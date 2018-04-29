@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+                                   , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Parko</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+  </head>
+  <body>
+    <h1 align="middle" style="font-size:100%">Rent my Parking Spot</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          
+          <div  class="imgcontainer">
+            <img style="width:20%" src="img/drive.png" alt="Avatar" class="avatar">
+            <p style="font-size:70%">Upload the pictite of the driveway</p>
+			<button style=" background-color:gray;" onclick="uploadFunction()">Upload Photo</button>
+          </div>
+          
+          
+        </div>
+        <div class="col">
+          <form  class="pure-form">
+            <fieldset>
+              <legend>Rented Spot Info:</legend>
+              <input placeholder="Address:" name="fullname" minlength="5" type="text" required />
+             
+              <p>Enter the time Parking Spot is available:</p>
+
+              <label>start &nbsp;  <input type="time" id="myTime1"></label>
+              <br>
+              <br>
+
+              <label>finish <input type="time" id="myTime2"></label>
+
+              <br>
+              <br>
+
+                <button type="submit" value="Submit">Post my Listing</button>
+
+              <p id="demo"></p>
+
+              <script>
+                function myFunction() {
+                  var x = document.getElementById("myTime").type;
+                  document.getElementById("demo").innerHTML = x;
+                }
+              </script>
+
+              
+              
+              
+              
+            </fieldset>
+          </form>
+        </div>
+      </div>   
+   
+  
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+      app.initialize();
+    </script>
+  </body>
+</html>

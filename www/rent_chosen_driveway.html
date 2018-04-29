@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+                                   , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="utf-8">
+	
+  <!--Bootstrap/jquiry includes-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+    <title>Parko</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+  </head>
+  <body>
+    <h1 align="middle">Rent Chosen parking spot</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+         
+    
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <a href="img/driveway.jpg" target="_blank">
+          <img src="img/driveway.jpg" alt="Fjords" style="width:100%">
+          <div class="caption">
+            <p>Chosen Parking Spot</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+  
+          
+          
+        </div>
+       
+       
+            <div style="padding:5%" class="container">
+              <p>Spot Information:</p>
+			  <p id ="owner"><b>The Owner:</b> Jhon Smith</p>			  
+              <p id ="address"><b>Address:</b> 20 Market Street, Nipomo, CA</p>
+             
+             
+			  <p>Chosen time is:</p>
+              <p><b>FROM 2P.M. TO 5 A.M.</b></p>
+			  <p style="text-align: center" id="say"></p>
+               <form style="width:100px" name = "checkout">
+			   <output name="">Total: 2.99$</output>
+			   </form>
+			    
+              <br>
+              <br>
+            <div/>
+			
+              <button onclick="myMessage()""> <img style ="width:35px; float:left; padding-right:5px;" class="img-responsive" src="img/pp.png" alt="Paypal">Confirm and Pay</button>
+              <p id="message"></p> 
+              
+              <script>
+			  function myMessage(){
+			    document.getElementById("say").innerHTML = "Your Payment was Successfully Processed";
+			  }
+			  </script>
+              <script>
+                function myFunction() {
+                  var x = document.getElementById("myTime").type;
+                  document.getElementById("demo").innerHTML = x;
+                }
+              </script>
+
+              
+              
+              
+              
+            </fieldset>
+          </form>
+        </div>
+      </div>   
+   
+  
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+      app.initialize();
+    </script>
+  </body>
+</html>

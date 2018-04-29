@@ -80,7 +80,7 @@
             }
 
             function createMarker(place) {
-                var placeLoc = place.geometry.location;
+                var placeLoc = place.geometry.location ;
                 var marker = new google.maps.Marker({
                     map: map,
                     position: place.geometry.location
@@ -141,7 +141,7 @@
                     const targetPoint = turf.point([currentPosition.lng, currentPosition.lat]);
                     const nearest = turf.nearestPoint(targetPoint, points);
 
-                    console.log(nearest)
+                    console.log(nearest);
                 } else {
                     alert("Please wait for location services!");
                 }
