@@ -93,13 +93,13 @@
         alert("Please enable location services!")/*displays error message*/
     };
 
-
+// Find current position
     function getPosition() {
         navigator.geolocation.getCurrentPosition(function (position) {
             return position
         })
     }
-
+// Sell - create object for locations
     document.getElementById("sell").addEventListener("click", function () {
         let position = {
             lat: 2,
@@ -109,20 +109,20 @@
         let allSellings = JSON.parse(localStorage.getItem('selling')) || []; // []
         allSellings.push(position);
         localStorage.setItem('selling', JSON.stringify(allSellings));
-    });
-
+    });    
+    // Buying function - used turf API to connect user to nearest parking location.
     document.getElementById("buy").addEventListener("click", function () {
         let targetPoint = turf.point([0, 0]);
 
         let allSellings = JSON.parse(localStorage.getItem('selling')) || []; // [
-        var points = turf.featureCollection([])
+        let points = turf.featureCollection([])
 
         allSellings.forEach(function(item){
             let point = turf.point([item.lat, item.lng], {name: item.name});
             points.features.push(point);
         })
 
-        var nearest = turf.nearestPoint(targetPoint, points);
+        let nearest = turf.nearestPoint(targetPoint, points);
 
         console.log(points)
         console.log(nearest)
