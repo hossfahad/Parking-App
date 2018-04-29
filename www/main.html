@@ -36,14 +36,12 @@
 
     <div style="width:100%" class="row-fluid">
         <div align="middle" class="span 12">
-            <button type="button" class="btn btn-default" id="sell">Give spot</button>
-
+            <button type="button" class="btn btn-default" id="sell" onclick=window.open(selling.html)>Give spot</button>
             <button type="button" class="btn btn-default" id="buy"> Buy Spot</button>
             <script>
             // document.getElementById("buy").addEventListener("click", function(lat, lng)
             // )
             </script>
-
             <button type="button" class="btn btn-default" onclick=window.open(driveway.html) id="driveway">Rent driveway</button>
         </div>
     </div>
@@ -75,10 +73,10 @@
         }
     }
     function createMarker(place) {
-        let placeLoc = place.geometry.location;
+        let placeLoc = {lat: position.coord.latitude, lng: position.coords.longitude} ;
         let marker = new google.maps.Marker({
             map: map,
-            position: place.geometry.location
+            position: placeLoc;
         });
         google.maps.event.addListener(marker, 'click', function () {
             infowindow.setContent(place.name);
