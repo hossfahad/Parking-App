@@ -28,105 +28,128 @@
     </style>
 
 </head>
+
 <body>
     <div id="map"></div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
-
-
+    <footer align="middle">
+    </footer>
     <div style="width:100%" class="row-fluid">
         <div align="middle" class="span 12">
-            <button type="button" class="btn btn-default" id="sell" onclick=window.open(selling.html)>Give spot</button>
-            <button type="button" class="btn btn-default" id="buy"> Buy Spot</button>
-            <script>
-            // document.getElementById("buy").addEventListener("click", function(lat, lng)
-            // )
-            </script>
-            <button type="button" class="btn btn-default" onclick=window.open(driveway.html) id="driveway">Rent driveway</button>
+            <input type="text" id="name"/>
+            <button type="button" class="btn btn-default" id="sell">Give spot</button>
+            <button type="button" class="btn btn-default" id="buy">Find Spot</button>
+            <button type="button" class="btn btn-default">Rent driveway</button>
+
         </div>
+
     </div>
-<script>
-    // This example requires the Places library. Include the libraries=places
-    // parameter when you first load the API. For example:
-    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-    var map;
-    var infowindow;
-    function initMap() {
-        var pyrmont = { lat: -33.867, lng: 151.195 };
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: pyrmont,
-            zoom: 15
-        });
-        infowindow = new google.maps.InfoWindow();
-        let service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-            location: pyrmont,
-            radius: 500,
-            type: ['store']
-        }, callback);
-    }
-    function callback(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-                createMarker(results[i]);
+
+    <script>
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+        let map;
+        let infowindow;
+        let currentPosition = null;
+
+        function initMap() {
+            var pyrmont = {
+                lat: -33.867,
+                lng: 151.195
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: pyrmont,
+                zoom: 15
+            });
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: pyrmont,
+                radius: 500,
+                type: ['store']
+            }, callback);
+
+
+            function callback(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        createMarker(results[i]);
+                    }
+                }
             }
+
+            function createMarker(place) {
+                var placeLoc = place.geometry.location;
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent(place.name);
+                    infowindow.open(map, this);
+                });
+            }
+
+            if ("geolocation" in navigator) {
+                navigator.geolocation.watchPosition(function (position) {
+                    console.log(position)
+                    currentPosition = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    map.setCenter(currentPosition);
+                });
+            } else {
+                alert("Please enable location services!") /*displays error message*/
+
+            }
+
+            document.getElementById('sell').addEventListener('click', function () {
+                if (currentPosition !== null) {
+                    //get data from localstorage or default to new array
+                    const listings = JSON.parse(localStorage.getItem('listings')) || [];
+
+                    //add new listing using currentPosition
+                    const listing = {
+                        name: document.getElementById('name').value,
+                        position: currentPosition
+                    };
+                    listings.push(listing);
+
+                    //save changes to localstorage
+                    localStorage.setItem('listings', JSON.stringify(listings));
+
+                } else {
+                    alert("Please wait for location services!");
+                }
+            });
+
+            document.getElementById('buy').addEventListener('click', function () {
+                if (currentPosition !== null) {
+                    //get data from localstorage, set to features collection
+                    const listings = JSON.parse(localStorage.getItem('listings'));
+                    const points = turf.featureCollection([]);
+                    listings.forEach(listing => {
+                        points.features.push(turf.point([listing.position.lng, listing.position.lat], {
+                            name: listing.name
+                        }))
+                    });
+
+                    //find nearest parking spot (longitude, latitude)
+                    const targetPoint = turf.point([currentPosition.lng, currentPosition.lat]);
+                    const nearest = turf.nearestPoint(targetPoint, points);
+
+                    console.log(nearest)
+                } else {
+                    alert("Please wait for location services!");
+                }
+            });
         }
-    }
-    function createMarker(place) {
-        let placeLoc = {lat: position.coord.latitude, lng: position.coords.longitude} ;
-        let marker = new google.maps.Marker({
-            map: map,
-            position: placeLoc;
-        });
-        google.maps.event.addListener(marker, 'click', function () {
-            infowindow.setContent(place.name);
-            infowindow.open(map, this);
-        });
-    }
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
-        });
-    } else {
-        alert("Please enable location services!")/*displays error message*/
-    };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiFED-UY-SYaeIwHBrIZ5a9Fo2H-NR8Rs&libraries=places&callback=initMap"
+        async defer></script>
+</body>
 
-// Find current position
-    function getPosition() {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            return position
-        })
-    }
-// Sell - create object for locations
-    document.getElementById("sell").addEventListener("click", function () {
-        let position = {
-            lat: 2,
-            lng: 2,
-            name: "test"
-        }
-        let allSellings = JSON.parse(localStorage.getItem('selling')) || []; // []
-        allSellings.push(position);
-        localStorage.setItem('selling', JSON.stringify(allSellings));
-    });    
-    // Buying function - used turf API to connect user to nearest parking location.
-    document.getElementById("buy").addEventListener("click", function () {
-        let targetPoint = turf.point([0, 0]);
-
-        let allSellings = JSON.parse(localStorage.getItem('selling')) || []; // [
-        let points = turf.featureCollection([])
-
-        allSellings.forEach(function(item){
-            let point = turf.point([item.lat, item.lng], {name: item.name});
-            points.features.push(point);
-        })
-
-        let nearest = turf.nearestPoint(targetPoint, points);
-
-        console.log(points)
-        console.log(nearest)
-
-    })
-
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiFED-UY-SYaeIwHBrIZ5a9Fo2H-NR8Rs&libraries=places&callback=initMap"
-    async defer></script>
+</html>

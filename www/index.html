@@ -45,7 +45,7 @@
 <body>
     
     <h1 style="text-align:center; font-family:Tahoma">Park-Here</h1>
-<form action="login">
+<form id="login">
     <div class="imgcontainer">
         <img style="width: 30%;text-align:center;" src="img/logo.png" alt="logo" class="">
     </div>
@@ -84,6 +84,11 @@
                 alert("Error Password or Username")/*displays error message*/
             }
         }
+
+        document.getElementById('login').addEventListener("submit", function(e){
+            e.preventDefault();
+            check(e.target);
+        })
     </script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
