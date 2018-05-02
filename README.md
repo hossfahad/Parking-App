@@ -5,7 +5,7 @@ Created an application for CUNY Hackathon Spring 2018.
 
 Parko - Parking Made Easier
 
-Team Members: Richard Amin (https://github.com/ra1993) , Irina Fedorova (https://github.com/irinafedorovacisc)
+Team Members: Richard Amin (https://github.com/ra1993) , Irina Fedorova (https://github.com/irinafedorovacisc), Fahad Hossain (https://github.com/hossfahad)
 Assisted by: Zhik (https://github.com/zhik)
 
 Summary: For the CUNY Hackathon, our prompt was to find a way to make New Yorkers lives a bit easier. So our plan was to develop Parko with the intention to save time. In New York, time is one of our biggest assets. Parko is a user-exchanged parking app. Users may exchange parking spots from other drivers and vice-versa from street parking, to parking garages and even driveways.
